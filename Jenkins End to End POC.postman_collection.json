@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "COVID CURRENT STATE NUMBER1",
+			"name": "COVID CURRENT STATE NUMBER",
 			"event": [
 				{
 					"listen": "test",
