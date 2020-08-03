@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "e62eaa15-ccf4-43ef-9819-3060c7018295",
+		"name": "0.0 A  Jenkins End to End POC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "COVID CURRENT STATE NUMBERS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab6a55ed-4e0a-4568-9c16-b537c3dafcc1",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"GA\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(900);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://covidtracking.com/api/states",
+					"protocol": "https",
+					"host": [
+						"covidtracking",
+						"com"
+					],
+					"path": [
+						"api",
+						"states"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ACCUWEATHER CURRENT CONDITIONS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6ef11e10-85ad-41f1-bc8e-e5864f732c3c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"F\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(900);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ncus-gadc-api-production.trafficmanager.net/currentconditions/v1/348181.json?apikey=5251445912b143d8b4bee5a741762dd1&language=en-us&details=True",
+					"protocol": "http",
+					"host": [
+						"ncus-gadc-api-production",
+						"trafficmanager",
+						"net"
+					],
+					"path": [
+						"currentconditions",
+						"v1",
+						"348181.json"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "5251445912b143d8b4bee5a741762dd1"
+						},
+						{
+							"key": "language",
+							"value": "en-us"
+						},
+						{
+							"key": "details",
+							"value": "True"
+						}
+					]
+				},
+				"description": "To see the current conditios of any locations update the location key in the API call. Location key is always the last parameter in the application URL.\nfor example:https://development.glacier.accuweather.com/en/us/cambridge/02139/weather-forecast/329319  in this case 329319 is the location key"
+			},
+			"response": []
+		},
+		{
+			"name": "ACCUWEATHER DAILY FORECAST SUN/MOON",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c3cb7e66-39ab-4b12-ab2d-0491614498ff",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"A shower\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(900);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ncus-gadc-api-production.trafficmanager.net/forecasts/v1/daily/348181.json?language=en-us&details=True&metric=False&dayCount=1",
+					"protocol": "http",
+					"host": [
+						"ncus-gadc-api-production",
+						"trafficmanager",
+						"net"
+					],
+					"path": [
+						"forecasts",
+						"v1",
+						"daily",
+						"348181.json"
+					],
+					"query": [
+						{
+							"key": "language",
+							"value": "en-us"
+						},
+						{
+							"key": "details",
+							"value": "True"
+						},
+						{
+							"key": "metric",
+							"value": "False"
+						},
+						{
+							"key": "dayCount",
+							"value": "1"
+						}
+					]
+				},
+				"description": "we extract out the sun & moon properties from this API call. Always update the location key in the API call."
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
